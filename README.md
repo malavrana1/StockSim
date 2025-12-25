@@ -40,15 +40,6 @@ That's it! Open `http://localhost:5173` in your browser.
 6. Add stocks to your watchlist
 7. Check out the latest stock news
 
-## Project Structure
-
-```
-StockSim/
-├── frontend/     # Vue.js user interface
-├── backend/      # Node.js server for stock data
-├── functions/    # Firebase functions
-└── shared/       # Shared code
-```
 
 ## Tech Stack
 
@@ -59,27 +50,9 @@ StockSim/
 
 ## Building & Deploying
 
-**Quick deploy (build + deploy):**
+Build and deploy:
 ```bash
 npm run build:frontend && npm run deploy:hosting
-```
-
-**Or step by step:**
-```bash
-# Build for production
-npm run build:frontend
-
-# Deploy to Firebase (free hosting)
-npm run deploy:hosting
-```
-
-**Other deployment options:**
-```bash
-# Deploy everything (will fail for functions on free plan)
-npm run deploy
-
-# Deploy only functions (requires Blaze plan)
-npm run deploy:functions
 ```
 
 **Live Demo:** [https://stocksim-3ab78.web.app](https://stocksim-3ab78.web.app)
