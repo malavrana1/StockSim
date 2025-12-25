@@ -38,7 +38,6 @@ export class EventSimulator {
     const event = this.events[Math.floor(Math.random() * this.events.length)]
     const stocks = this.marketService.getAllStocks()
 
-    // Apply event to affected stocks
     const affectedStocks = stocks.filter(stock => 
       event.affectedSectors.includes('all') || 
       event.affectedSectors.includes(stock.sector)
@@ -49,7 +48,6 @@ export class EventSimulator {
       this.marketService.updateStockPrice(stock.id, newPrice)
     })
 
-    // Emit event to clients
     this.io.emit('market:event', {
       id: Date.now(),
       type: event.type,
@@ -59,7 +57,6 @@ export class EventSimulator {
       timestamp: new Date().toISOString()
     })
 
-    // Emit news
     this.io.emit('market:news', {
       id: Date.now(),
       title: event.type.replace(/_/g, ' '),

@@ -1,6 +1,5 @@
 export class AIService {
   async generateSuggestions() {
-    // Mock AI suggestions - replace with actual AI/ML logic
     const suggestions = [
       {
         id: 1,
@@ -32,7 +31,6 @@ export class AIService {
   }
 
   analyzePortfolio(portfolio) {
-    // Mock portfolio analysis
     return {
       riskLevel: 'medium',
       diversification: 'good',

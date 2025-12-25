@@ -64,8 +64,7 @@ watch(() => marketStore.activeStocks, (stocks) => {
 
 onMounted(async () => {
   try {
-    const wsUrl = import.meta.env.VITE_WS_URL || 'http://localhost:3000'
-    connect(wsUrl)
+    connect()
     await fetchStocks()
   } catch (err) {
     console.error('Error initializing dashboard:', err)
