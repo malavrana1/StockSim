@@ -89,6 +89,7 @@
 import { ref, watch, computed } from 'vue'
 import { useAnimations } from '../composables/useAnimations'
 import { useWatchlistStore } from '../store/watchlist'
+import { formatNumber } from '../utils/helpers'
 import './StockCard.css'
 
 const props = defineProps({
@@ -181,12 +182,6 @@ const getSectorBadgeClass = (sector) => {
     'Crypto': 'bg-purple'
   }
   return classes[sector] || 'bg-secondary'
-}
-
-const formatNumber = (num) => {
-  if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M'
-  if (num >= 1000) return (num / 1000).toFixed(1) + 'K'
-  return num.toString()
 }
 </script>
 
