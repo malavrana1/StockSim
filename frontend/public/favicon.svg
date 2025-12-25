@@ -6,10 +6,8 @@
     </linearGradient>
   </defs>
   
-  <!-- Background circle -->
   <circle cx="50" cy="50" r="48" fill="url(#grad1)"/>
   
-  <!-- Stock chart line -->
   <path d="M 15 70 L 25 60 L 35 50 L 45 40 L 55 35 L 65 30 L 75 25 L 85 20" 
         stroke="#ffffff" 
         stroke-width="3" 
@@ -17,7 +15,6 @@
         stroke-linecap="round" 
         stroke-linejoin="round"/>
   
-  <!-- Chart points -->
   <circle cx="25" cy="60" r="2.5" fill="#ffffff"/>
   <circle cx="35" cy="50" r="2.5" fill="#ffffff"/>
   <circle cx="45" cy="40" r="2.5" fill="#ffffff"/>
@@ -26,7 +23,6 @@
   <circle cx="75" cy="25" r="2.5" fill="#ffffff"/>
   <circle cx="85" cy="20" r="3" fill="#10b981"/>
   
-  <!-- Upward arrow indicator -->
   <path d="M 85 20 L 80 15 L 90 15 Z" fill="#10b981"/>
 </svg>
 

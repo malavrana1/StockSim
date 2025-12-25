@@ -1,11 +1,8 @@
-// Trade model schema (for MongoDB/Mongoose)
-// This is a template - implement with actual database
-
 export const TradeSchema = {
   userId: String,
   stockId: String,
   quantity: Number,
-  type: String, // 'buy' or 'sell'
+  type: String,
   price: Number,
   timestamp: Date
 }
