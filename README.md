@@ -1,92 +1,81 @@
 # StockSim 📈
 
-A simple and beautiful stock market simulator where you can explore stocks, calculate potential profits, and keep track of your favorite companies. Think of it as your personal stock market playground!
+A simple stock market simulator where you can explore stocks, calculate profits, and track your favorite companies. Think of it as your personal stock market playground!
 
-## What is this?
+## What can you do?
 
-StockSim lets you:
-- **Browse real stocks** - See live prices for hundreds of stocks and cryptocurrencies
-- **Calculate profits** - Figure out how much you'd make if you invested in a stock at a certain price
-- **Save your calculations** - Keep track of your favorite investment scenarios
-- **Watch stocks** - Build your own watchlist of companies you're interested in
-- **Read news** - Stay updated with the latest stock market news
+- Browse real stocks and cryptocurrencies with live prices
+- Calculate how much profit you'd make on investments
+- Save your calculations and load them back later
+- Build a watchlist of stocks you're interested in
+- Read the latest stock market news
+- Switch between light and dark themes
+- Customize your settings (default amounts, currency, etc.)
 
-Everything updates in real-time, so you're always seeing the latest prices.
+Everything updates in real-time, so you always see the latest prices.
 
 ## Getting Started
 
-### Quick Setup
-
-1. **Install everything:**
+1. Install everything:
    ```bash
    npm run install:all
    ```
 
-2. **Start the app:**
+2. Start the app:
    ```bash
    npm run dev
    ```
 
-That's it! The frontend will open at `http://localhost:5173` and the backend will run on `http://localhost:3000`.
+That's it! Open `http://localhost:5173` in your browser.
 
-### What You Need
-
-- **Node.js** installed on your computer
-- That's literally it! No API keys needed - everything works out of the box.
-
-The app uses Yahoo Finance API which is completely free and doesn't require any signup or API keys. Just install and run!
+**What you need:** Just Node.js installed. No API keys needed - everything works out of the box using free APIs.
 
 ## How to Use
 
-1. **Browse stocks** - Scroll through the list of available stocks and cryptocurrencies
-2. **Select a stock** - Click on any stock to see more details
-3. **Calculate profits** - Enter how much you'd invest and what price you're targeting
-4. **Save it** - Click "Save" to keep your calculation for later
-5. **Load it back** - Click on any saved calculation to load it back into the calculator
-6. **Watch stocks** - Add stocks to your watchlist to keep an eye on them
+1. Sign up or login
+2. Browse stocks from the dropdown
+3. Enter your investment amount, purchase price, and target price
+4. See your potential profit/loss instantly
+5. Save calculations to load them back later
+6. Add stocks to your watchlist
+7. Check out the latest stock news
 
 ## Project Structure
 
 ```
 StockSim/
-├── frontend/          # The user interface (Vue.js)
-├── backend/           # The server that fetches stock data
-├── functions/         # Firebase functions (for deployment)
-└── shared/            # Shared code between frontend and backend
+├── frontend/     # Vue.js user interface
+├── backend/      # Node.js server for stock data
+├── functions/    # Firebase functions
+└── shared/       # Shared code
 ```
 
-## Tech Stuff
+## Tech Stack
 
-**Frontend:**
-- Vue 3 - The framework that makes everything work
-- Bootstrap - Makes it look nice
-- Socket.io - Keeps prices updated in real-time
+**Frontend:** Vue 3, Pinia, Bootstrap, Socket.io  
+**Backend:** Node.js, Express, Socket.io  
+**Data:** Yahoo Finance API, Finnhub API (both free, no keys needed)  
+**Deployment:** Firebase Hosting & Functions
 
-**Backend:**
-- Node.js + Express - Handles API requests
-- Socket.io - Sends real-time updates to the frontend
-- Yahoo Finance API - Gets all the stock data (free!)
+## Building & Deploying
 
-## Building for Production
-
-If you want to build the app for production:
-
+Build for production:
 ```bash
 npm run build:frontend
 ```
 
-This creates an optimized version in the `frontend/dist` folder.
+Deploy to Firebase:
+```bash
+npm run deploy
+```
 
-## Deploying to Firebase
+## Notes
 
-The app is set up to deploy to Firebase Hosting. Check out `FIREBASE_SETUP.md` for detailed instructions.
-
-## Important Notes
-
-- This is a **simulator** - you can't actually buy or sell stocks here
-- Stock prices update every minute automatically
-- All data comes from free APIs - no payment required
-- Your watchlist and saved calculations are stored locally in your browser
+- This is a **simulator** - no real trading happens here
+- Prices update in real-time
+- All data is free (no API keys needed)
+- Your watchlist and calculations are saved in your browser
+- Popular stocks appear at the top of the list
 
 ## License
 
