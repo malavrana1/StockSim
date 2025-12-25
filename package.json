@@ -1,20 +1,32 @@
 {
   "name": "stocksim",
+  "version": "1.0.0",
+  "description": "StockSim - Interactive Stock Market Simulator",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "pinia": "^3.0.4",
-    "vue": "^3.5.24",
-    "vue-router": "^4.6.4"
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "install:functions": "cd functions && npm install",
+    "install:all": "npm run install:frontend && npm run install:backend && npm run install:functions",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "npm run build:frontend",
+    "deploy": "firebase deploy",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:functions": "firebase deploy --only functions",
+    "serve": "firebase emulators:start"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.1",
-    "vite": "^7.2.4"
-  }
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "stock",
+    "simulator",
+    "vue",
+    "trading"
+  ],
+  "author": "",
+  "license": "MIT"
 }

@@ -1,0 +1,280 @@
+.saved-calculations {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme="dark"] .saved-calculations {
+  color: #e2e8f0;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 12px rgba(102, 126, 234, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .card {
+  background: #1e293b;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-bottom: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h6 {
+  font-size: 0.75rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+[data-theme="dark"] .card-header h6 {
+  color: white;
+}
+
+.card-body {
+  padding: 0.5rem;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  gap: 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  color: #6c757d;
+  font-size: 0.875rem;
+  flex: 0 0 auto;
+}
+
+[data-theme="dark"] .empty-state {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .empty-state p {
+  color: #94a3b8;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: #cbd5e0;
+}
+
+[data-theme="dark"] .empty-state i {
+  color: #475569;
+}
+
+.calculations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.calculation-item {
+  padding: 0.5rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 6px;
+  border-left: 3px solid #667eea;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.calculation-item::after {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 0.75rem;
+  color: #667eea;
+}
+
+.calculation-item:hover::after {
+  content: '↗';
+  opacity: 0.6;
+}
+
+[data-theme="dark"] .calculation-item {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .calc-symbol {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .calc-value {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .calc-label {
+  color: #94a3b8;
+}
+
+.calculation-item:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+  border-left-color: #764ba2;
+  border-left-width: 4px;
+}
+
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.375rem;
+}
+
+.calc-stock-info {
+  flex: 1;
+}
+
+.calc-symbol {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #2d3748;
+  line-height: 1.2;
+}
+
+.calc-stock-info small {
+  font-size: 0.5625rem;
+}
+
+[data-theme="dark"] .calc-stock-info small {
+  color: #94a3b8;
+}
+
+.calc-details {
+  margin: 0.375rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+}
+
+.calc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calc-label {
+  color: #718096;
+  font-weight: 500;
+}
+
+.calc-value {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.calc-profit {
+  margin: 0.5rem 0;
+  padding: 0.375rem;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.calc-profit.profit-positive {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border: 1px solid #28a745;
+}
+
+.calc-profit.profit-negative {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  border: 1px solid #dc3545;
+}
+
+.calc-profit-label {
+  font-size: 0.625rem;
+  color: #718096;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.125rem;
+}
+
+.calc-profit-value {
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin: 0.125rem 0;
+}
+
+.calc-profit.profit-positive .calc-profit-value {
+  color: #155724;
+}
+
+.calc-profit.profit-negative .calc-profit-value {
+  color: #721c24;
+}
+
+.calc-profit-percent {
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.calc-profit.profit-positive .calc-profit-percent {
+  color: #155724;
+}
+
+.calc-profit.profit-negative .calc-profit-percent {
+  color: #721c24;
+}
+
+.calc-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.375rem;
+  padding-top: 0.375rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.625rem;
+}
+
+[data-theme="dark"] .calc-footer {
+  border-top-color: #475569;
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .calculation-item:hover {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-color: #667eea;
+  border-left-width: 4px;
+}
+
+[data-theme="dark"] .calculation-item:hover::after {
+  color: #818cf8;
+}
+
+
