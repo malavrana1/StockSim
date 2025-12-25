@@ -38,3 +38,6 @@ backend/dist
 # Database
 *.db
 *.sqlite
+node_modules.root/
+package-lock.json.root
+package.json.root
