@@ -47,3 +47,7 @@ backend/dist
 node_modules.root/
 package-lock.json.root
 package.json.root
+
+# Firebase
+.firebase/
+.firebaserc.local
