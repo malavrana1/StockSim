@@ -96,7 +96,7 @@
 import { useSavedCalculationsStore } from '../store/savedCalculations'
 import { useConfirm } from '../composables/useConfirm'
 import { useToast } from '../composables/useToast'
-import { formatRelativeTime } from '../utils/helpers'
+import { formatTime } from '../utils/helpers'
 import './SavedCalculations.css'
 
 const emit = defineEmits(['load-calculation'])
@@ -136,6 +136,5 @@ const clearAll = async () => {
   }
 }
 
-const formatTime = formatRelativeTime
 </script>
 
