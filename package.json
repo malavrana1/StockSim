@@ -19,7 +19,8 @@
     "serve": "firebase emulators:start"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "webpack-cli": "^6.0.1"
   },
   "keywords": [
     "stock",
