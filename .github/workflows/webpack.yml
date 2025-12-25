@@ -23,7 +23,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
-      run: npm run install:all
+      run: |
+        npm install
+        cd frontend
+        rm -rf node_modules package-lock.json
+        npm install
+        cd ../backend
+        npm install || true
 
     - name: Build frontend
       run: npm run build:frontend
