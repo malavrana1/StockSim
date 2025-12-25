@@ -2,6 +2,10 @@
 
 A simple stock market simulator where you can explore stocks, calculate profits, and track your favorite companies. Think of it as your personal stock market playground!
 
+**🔗 Links:**
+- 🌐 [Live Demo](https://stocksim-3ab78.web.app)
+- 💻 [GitHub Repository](https://github.com/malavrana1/StockSim)
+
 ## What can you do?
 
 - Browse real stocks and cryptocurrencies with live prices
@@ -55,7 +59,7 @@ Build and deploy:
 npm run build:frontend && npm run deploy:hosting
 ```
 
-**Live Demo:** [https://stocksim-3ab78.web.app](https://stocksim-3ab78.web.app)
+**🌐 Live Demo:** [https://stocksim-3ab78.web.app](https://stocksim-3ab78.web.app)
 
 ## Notes
 
