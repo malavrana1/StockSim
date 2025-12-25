@@ -34,17 +34,6 @@ That's it! Open `http://localhost:5173` in your browser.
 
 **What you need:** Just Node.js installed. No API keys needed - everything works out of the box using free APIs.
 
-## How to Use
-
-1. Sign up or login
-2. Browse stocks from the dropdown
-3. Enter your investment amount, purchase price, and target price
-4. See your potential profit/loss instantly
-5. Save calculations to load them back later
-6. Add stocks to your watchlist
-7. Check out the latest stock news
-
-
 ## Tech Stack
 
 **Frontend:** Vue 3, Pinia, Bootstrap, Socket.io  
@@ -59,15 +48,11 @@ Build and deploy:
 npm run build:frontend && npm run deploy:hosting
 ```
 
-**🌐 Live Demo:** [https://stocksim-3ab78.web.app](https://stocksim-3ab78.web.app)
-
 ## Notes
 
 - This is a **simulator** - no real trading happens here
-- Prices update in real-time
 - All data is free (no API keys needed)
 - Your watchlist and calculations are saved in your browser
-- Popular stocks appear at the top of the list
 
 ## License
 
