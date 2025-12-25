@@ -66,7 +66,11 @@
             Track live prices, calculate profits, and stay informed with real-time market insights
           </p>
           <div class="hero-actions">
-            <router-link to="/login" class="btn-primary-custom">
+            <router-link v-if="userStore.isAuthenticated" to="/dashboard" class="btn-primary-custom">
+              <span>Go to Dashboard</span>
+              <i class="bi bi-arrow-right"></i>
+            </router-link>
+            <router-link v-else to="/login" class="btn-primary-custom">
               <span>Get Started Free</span>
               <i class="bi bi-arrow-right"></i>
             </router-link>
@@ -168,7 +172,11 @@
         <div class="cta-content">
           <h2>Ready to Start?</h2>
           <p>Join thousands of users tracking markets and making smarter investment decisions</p>
-          <router-link to="/login" class="btn-primary-custom large">
+          <router-link v-if="userStore.isAuthenticated" to="/dashboard" class="btn-primary-custom large">
+            <span>Go to Dashboard</span>
+            <i class="bi bi-arrow-right"></i>
+          </router-link>
+          <router-link v-else to="/login" class="btn-primary-custom large">
             <span>Create Free Account</span>
             <i class="bi bi-arrow-right"></i>
           </router-link>
@@ -239,9 +247,6 @@ const setGraphLineRef = async (el, index) => {
 }
 
 onMounted(async () => {
-  if (userStore.isAuthenticated) {
-    router.push('/dashboard')
-  }
   generateGraphPoints()
   await nextTick()
   const graphLines = document.querySelectorAll('.graph-line')
