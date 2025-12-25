@@ -55,7 +55,7 @@ StockSim/
 **Frontend:** Vue 3, Pinia, Bootstrap, Socket.io  
 **Backend:** Node.js, Express, Socket.io  
 **Data:** Yahoo Finance API, Finnhub API (both free, no keys needed)  
-**Deployment:** Firebase Hosting & Functions
+**Deployment:** Firebase Hosting (Free Plan)
 
 ## Building & Deploying
 
@@ -64,10 +64,17 @@ Build for production:
 npm run build:frontend
 ```
 
-Deploy to Firebase:
+Deploy to Firebase (free hosting):
+```bash
+npm run deploy:hosting
+```
+
+Or deploy everything:
 ```bash
 npm run deploy
 ```
+
+**Live Demo:** [https://stocksim-3ab78.web.app](https://stocksim-3ab78.web.app)
 
 ## Notes
 
