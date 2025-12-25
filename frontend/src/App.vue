@@ -1,7 +1,7 @@
 <script setup>
 import './App.css'
 import { RouterView, useRouter, useRoute } from 'vue-router'
-import { computed, watch } from 'vue'
+import { watch } from 'vue'
 import { useUserStore } from './store/user'
 import { useConfirm } from './composables/useConfirm'
 import { useToast } from './composables/useToast'
