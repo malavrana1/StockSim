@@ -1,17 +1,15 @@
 import { ref } from 'vue'
 import { io } from 'socket.io-client'
 import { useMarketStore } from '../store/market'
-import { useSettingsStore } from '../store/settings'
 
 export function useWebSocket() {
   const socket = ref(null)
   const connected = ref(false)
   const marketStore = useMarketStore()
-  const settingsStore = useSettingsStore()
 
   const connect = (url = null) => {
     const wsUrl = url || import.meta.env.VITE_WS_URL || 'http://localhost:3000'
-    socket.value = io(url, {
+    socket.value = io(wsUrl, {
       transports: ['websocket'],
       reconnection: true,
       reconnectionDelay: 1000,
