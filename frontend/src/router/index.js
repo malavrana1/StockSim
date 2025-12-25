@@ -4,7 +4,8 @@ import { useUserStore } from '../store/user'
 const routes = [
   {
     path: '/',
-    redirect: '/dashboard'
+    name: 'Home',
+    component: () => import('../views/HomeView.vue')
   },
   {
     path: '/login',
@@ -51,11 +52,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (to.path === '/') {
-    if (userStore.isAuthenticated) {
-      next('/dashboard')
-    } else {
-      next('/login')
-    }
+    next()
     return
   }
 
