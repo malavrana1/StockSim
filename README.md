@@ -59,19 +59,27 @@ StockSim/
 
 ## Building & Deploying
 
-Build for production:
+**Quick deploy (build + deploy):**
 ```bash
-npm run build:frontend
+npm run build:frontend && npm run deploy:hosting
 ```
 
-Deploy to Firebase (free hosting):
+**Or step by step:**
 ```bash
+# Build for production
+npm run build:frontend
+
+# Deploy to Firebase (free hosting)
 npm run deploy:hosting
 ```
 
-Or deploy everything:
+**Other deployment options:**
 ```bash
+# Deploy everything (will fail for functions on free plan)
 npm run deploy
+
+# Deploy only functions (requires Blaze plan)
+npm run deploy:functions
 ```
 
 **Live Demo:** [https://stocksim-3ab78.web.app](https://stocksim-3ab78.web.app)
