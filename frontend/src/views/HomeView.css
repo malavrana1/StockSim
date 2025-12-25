@@ -16,38 +16,6 @@
   pointer-events: none;
 }
 
-.grid-pattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: gridMove 25s linear infinite;
-}
-
-@keyframes gridMove {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(60px, 60px);
-  }
-}
-
-.ticker-container {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  display: flex;
-  gap: 4rem;
-  animation: tickerScroll 35s linear infinite;
-  white-space: nowrap;
-}
-
 .ticker-top {
   top: 8%;
 }
@@ -56,142 +24,6 @@
   bottom: 8%;
   animation-direction: reverse;
   animation-duration: 40s;
-}
-
-@keyframes tickerScroll {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.ticker-item {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(15px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.9rem;
-  font-weight: 600;
-  animation: tickerFloat 4s ease-in-out infinite;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-@keyframes tickerFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
-.stock-symbol {
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
-
-.stock-price {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.stock-price.positive {
-  color: #48bb78;
-}
-
-.stock-price.negative {
-  color: #f56565;
-}
-
-.stock-change {
-  font-size: 0.8rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 8px;
-  font-weight: 700;
-}
-
-.stock-change.positive {
-  background: rgba(72, 187, 120, 0.25);
-  color: #48bb78;
-  border: 1px solid rgba(72, 187, 120, 0.3);
-}
-
-.stock-change.negative {
-  background: rgba(245, 101, 101, 0.25);
-  color: #f56565;
-  border: 1px solid rgba(245, 101, 101, 0.3);
-}
-
-.floating-stocks {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-}
-
-.floating-stock {
-  position: absolute;
-  color: rgba(255, 255, 255, 0.12);
-  font-size: 2.5rem;
-  font-weight: 800;
-  animation: floatUp 22s ease-in-out infinite;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
-  letter-spacing: 2px;
-}
-
-@keyframes floatUp {
-  0% {
-    transform: translateY(100vh) rotate(0deg) scale(0.8);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.4;
-  }
-  90% {
-    opacity: 0.4;
-  }
-  100% {
-    transform: translateY(-150px) rotate(360deg) scale(1.2);
-    opacity: 0;
-  }
-}
-
-.graph-lines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-}
-
-.graph-line {
-  position: absolute;
-  width: 250px;
-  height: 100%;
-  opacity: 0.12;
-  animation: graphMove 18s ease-in-out infinite;
-}
-
-@keyframes graphMove {
-  0%, 100% {
-    transform: translateY(0) scaleY(1);
-    opacity: 0.12;
-  }
-  50% {
-    transform: translateY(-30px) scaleY(1.15);
-    opacity: 0.18;
-  }
 }
 
 .hero-section {
@@ -378,16 +210,6 @@
   transform: translateY(-2px);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 .features-section {
   padding: 6rem 0;
