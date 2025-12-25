@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { localStorageUtils } from '../utils/localStorage'
+
+const STORAGE_KEY = 'savedCalculations'
 
 export const useSavedCalculationsStore = defineStore('savedCalculations', () => {
   const savedCalculations = ref([])
@@ -15,32 +18,24 @@ export const useSavedCalculationsStore = defineStore('savedCalculations', () => 
       createdAt: new Date().toISOString()
     }
     savedCalculations.value.unshift(savedCalc)
-    localStorage.setItem('savedCalculations', JSON.stringify(savedCalculations.value))
+    localStorageUtils.set(STORAGE_KEY, savedCalculations.value)
   }
 
   function removeCalculation(id) {
     const index = savedCalculations.value.findIndex(c => c.id === id)
     if (index > -1) {
       savedCalculations.value.splice(index, 1)
-      localStorage.setItem('savedCalculations', JSON.stringify(savedCalculations.value))
+      localStorageUtils.set(STORAGE_KEY, savedCalculations.value)
     }
   }
 
   function clearAll() {
     savedCalculations.value = []
-    localStorage.removeItem('savedCalculations')
+    localStorageUtils.remove(STORAGE_KEY)
   }
 
   function loadSavedCalculations() {
-    const saved = localStorage.getItem('savedCalculations')
-    if (saved) {
-      try {
-        savedCalculations.value = JSON.parse(saved)
-      } catch (e) {
-        console.error('Error loading saved calculations:', e)
-        savedCalculations.value = []
-      }
-    }
+    savedCalculations.value = localStorageUtils.get(STORAGE_KEY, [])
   }
 
   loadSavedCalculations()

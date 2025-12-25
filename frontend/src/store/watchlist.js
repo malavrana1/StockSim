@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { localStorageUtils } from '../utils/localStorage'
+
+const STORAGE_KEY = 'watchlist'
 
 export const useWatchlistStore = defineStore('watchlist', () => {
   const watchlist = ref([])
@@ -15,7 +18,7 @@ export const useWatchlistStore = defineStore('watchlist', () => {
   function addToWatchlist(stockId) {
     if (!watchlist.value.includes(stockId)) {
       watchlist.value.push(stockId)
-      localStorage.setItem('watchlist', JSON.stringify(watchlist.value))
+      localStorageUtils.set(STORAGE_KEY, watchlist.value)
     }
   }
 
@@ -23,7 +26,7 @@ export const useWatchlistStore = defineStore('watchlist', () => {
     const index = watchlist.value.indexOf(stockId)
     if (index > -1) {
       watchlist.value.splice(index, 1)
-      localStorage.setItem('watchlist', JSON.stringify(watchlist.value))
+      localStorageUtils.set(STORAGE_KEY, watchlist.value)
     }
   }
 
@@ -36,20 +39,12 @@ export const useWatchlistStore = defineStore('watchlist', () => {
   }
 
   function loadWatchlist() {
-    const saved = localStorage.getItem('watchlist')
-    if (saved) {
-      try {
-        watchlist.value = JSON.parse(saved)
-      } catch (e) {
-        console.error('Error loading watchlist:', e)
-        watchlist.value = []
-      }
-    }
+    watchlist.value = localStorageUtils.get(STORAGE_KEY, [])
   }
 
   function clearWatchlist() {
     watchlist.value = []
-    localStorage.removeItem('watchlist')
+    localStorageUtils.remove(STORAGE_KEY)
   }
 
   loadWatchlist()
