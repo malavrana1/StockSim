@@ -111,7 +111,6 @@ import { useRoute } from 'vue-router'
 import { Chart, registerables } from 'chart.js'
 import { useMarketStore } from '../store/market'
 import { usePortfolioStore } from '../store/portfolio'
-import { formatNumber } from '../utils/helpers'
 import TradeModal from '../components/TradeModal.vue'
 
 Chart.register(...registerables)
@@ -143,6 +142,12 @@ const tradeModalOpen = ref(false)
 const tradeType = ref('buy')
 const chartCanvas = ref(null)
 let chartInstance = null
+
+const formatNumber = (num) => {
+  if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M'
+  if (num >= 1000) return (num / 1000).toFixed(1) + 'K'
+  return num.toString()
+}
 
 const openTradeModal = (type) => {
   tradeType.value = type

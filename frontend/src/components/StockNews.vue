@@ -66,7 +66,6 @@
 
 <script setup>
 import { ref, watch, onMounted, onUnmounted } from 'vue'
-import { formatRelativeTime } from '../utils/helpers'
 import './StockNews.css'
 
 const props = defineProps({
@@ -165,7 +164,18 @@ const generateSampleNews = (symbol) => {
   }))
 }
 
-const formatTime = formatRelativeTime
+const formatTime = (timestamp) => {
+  const date = new Date(timestamp)
+  const now = new Date()
+  const diff = now - date
+  const hours = Math.floor(diff / 3600000)
+  
+  if (hours < 1) return 'Just now'
+  if (hours < 24) return `${hours}h ago`
+  const days = Math.floor(hours / 24)
+  if (days < 7) return `${days}d ago`
+  return date.toLocaleDateString()
+}
 
 watch(() => props.stock, (newStock) => {
   if (newsRefreshInterval) {

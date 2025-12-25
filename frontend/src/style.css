@@ -10,3 +10,7 @@ body {
   color: #333;
   background-color: #fff;
 }
+
+#app {
+  min-height: 100vh;
+}
