@@ -32,26 +32,85 @@
             <i class="bi bi-graph-up-arrow me-2"></i>
             Select Stock
           </label>
-          <div class="select-wrapper">
-            <select 
-              id="stockSelect"
-              class="modern-select"
-              v-model="selectedStockId"
-              @change="onStockChange"
-              :disabled="!availableStocks || availableStocks.length === 0"
+          <div class="custom-select-wrapper" @click.stop>
+            <div 
+              class="custom-select-trigger"
+              :class="{ 'is-open': isDropdownOpen, 'is-disabled': !availableStocks || availableStocks.length === 0 }"
+              @click="toggleDropdown"
             >
-              <option value="">
-                {{ availableStocks && availableStocks.length > 0 ? 'Choose a stock...' : 'Loading stocks...' }}
-              </option>
-              <option 
-                v-for="s in availableStocks" 
-                :key="s.id"
-                :value="s.id"
-              >
-                {{ s.displaySymbol || s.symbol }} - {{ s.name }}
-              </option>
-            </select>
-            <i class="bi bi-chevron-down select-arrow"></i>
+              <div class="selected-stock-display" v-if="selectedStock">
+                <span class="stock-symbol-badge">{{ selectedStock.displaySymbol || selectedStock.symbol }}</span>
+                <span class="stock-name">{{ selectedStock.name }}</span>
+                <span class="stock-price" :class="getPriceChangeClass(selectedStock)">
+                  ${{ formatPrice(selectedStock.price) }}
+                  <span class="price-change-indicator" v-if="selectedStock.changePercent">
+                    {{ selectedStock.changePercent > 0 ? '+' : '' }}{{ selectedStock.changePercent.toFixed(2) }}%
+                  </span>
+                </span>
+              </div>
+              <div class="placeholder-text" v-else>
+                {{ availableStocks && availableStocks.length > 0 ? 'Search or select a stock...' : 'Loading stocks...' }}
+              </div>
+              <i class="bi bi-chevron-down select-arrow" :class="{ 'rotated': isDropdownOpen }"></i>
+            </div>
+            
+            <transition name="dropdown">
+              <div class="custom-select-dropdown" v-if="isDropdownOpen">
+                <div class="search-box">
+                  <i class="bi bi-search search-icon"></i>
+                  <input 
+                    type="text" 
+                    class="stock-search-input"
+                    v-model="searchQuery"
+                    @input="filterStocks"
+                    placeholder="Search stocks by symbol or name..."
+                    ref="searchInput"
+                  />
+                  <button 
+                    class="clear-search-btn" 
+                    v-if="searchQuery"
+                    @click="clearSearch"
+                  >
+                    <i class="bi bi-x"></i>
+                  </button>
+                </div>
+                
+                <div class="stocks-list" ref="stocksList">
+                  <div 
+                    v-for="stock in filteredStocks" 
+                    :key="stock.id"
+                    class="stock-option"
+                    :class="{ 'is-selected': selectedStockId === stock.id, 'is-highlighted': highlightedIndex === filteredStocks.indexOf(stock) }"
+                    @click="selectStock(stock)"
+                    @mouseenter="highlightedIndex = filteredStocks.indexOf(stock)"
+                  >
+                    <div class="stock-option-content">
+                      <div class="stock-info">
+                        <div class="stock-header">
+                          <span class="stock-symbol">{{ stock.displaySymbol || stock.symbol }}</span>
+                          <span class="stock-sector" v-if="stock.sector">{{ stock.sector }}</span>
+                        </div>
+                        <div class="stock-name-text">{{ stock.name }}</div>
+                      </div>
+                      <div class="stock-price-info">
+                        <div class="stock-price-value" :class="getPriceChangeClass(stock)">
+                          ${{ formatPrice(stock.price) }}
+                        </div>
+                        <div class="stock-change" :class="getPriceChangeClass(stock)">
+                          <i class="bi" :class="stock.changePercent >= 0 ? 'bi-arrow-up' : 'bi-arrow-down'"></i>
+                          <span>{{ stock.changePercent > 0 ? '+' : '' }}{{ stock.changePercent?.toFixed(2) || '0.00' }}%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="no-results" v-if="filteredStocks.length === 0">
+                    <i class="bi bi-search"></i>
+                    <p>No stocks found matching "{{ searchQuery }}"</p>
+                  </div>
+                </div>
+              </div>
+            </transition>
           </div>
         </div>
 
@@ -251,7 +310,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useMarketStore } from '../store/market'
 import { useSavedCalculationsStore } from '../store/savedCalculations'
 import { useSettingsStore } from '../store/settings'
@@ -274,6 +333,113 @@ const toast = useToast()
 const availableStocks = computed(() => marketStore.activeStocks)
 const selectedStockId = ref(null)
 const currentStock = ref(props.stock)
+
+const isDropdownOpen = ref(false)
+const searchQuery = ref('')
+const highlightedIndex = ref(-1)
+const searchInput = ref(null)
+const stocksList = ref(null)
+
+const selectedStock = computed(() => {
+  if (!selectedStockId.value) return null
+  return availableStocks.value.find(s => s.id === selectedStockId.value) || null
+})
+
+const filteredStocks = computed(() => {
+  if (!searchQuery.value.trim()) {
+    return availableStocks.value
+  }
+  const query = searchQuery.value.toLowerCase()
+  return availableStocks.value.filter(stock => {
+    const symbol = (stock.displaySymbol || stock.symbol || '').toLowerCase()
+    const name = (stock.name || '').toLowerCase()
+    return symbol.includes(query) || name.includes(query)
+  })
+})
+
+const toggleDropdown = () => {
+  if (!availableStocks.value || availableStocks.value.length === 0) return
+  isDropdownOpen.value = !isDropdownOpen.value
+  if (isDropdownOpen.value) {
+    setTimeout(() => {
+      searchInput.value?.focus()
+    }, 100)
+  }
+}
+
+const selectStock = (stock) => {
+  selectedStockId.value = stock.id
+  isDropdownOpen.value = false
+  searchQuery.value = ''
+  highlightedIndex.value = -1
+  onStockChange()
+}
+
+const clearSearch = () => {
+  searchQuery.value = ''
+  highlightedIndex.value = -1
+}
+
+const filterStocks = () => {
+  highlightedIndex.value = -1
+}
+
+const formatPrice = (price) => {
+  if (!price) return '0.00'
+  return price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
+const getPriceChangeClass = (stock) => {
+  if (!stock || stock.changePercent === undefined) return ''
+  return stock.changePercent >= 0 ? 'price-positive' : 'price-negative'
+}
+
+const handleClickOutside = (event) => {
+  if (isDropdownOpen.value && !event.target.closest('.custom-select-wrapper')) {
+    isDropdownOpen.value = false
+    searchQuery.value = ''
+  }
+}
+
+const handleKeydown = (event) => {
+  if (!isDropdownOpen.value) return
+  
+  if (event.key === 'Escape') {
+    isDropdownOpen.value = false
+    searchQuery.value = ''
+  } else if (event.key === 'ArrowDown') {
+    event.preventDefault()
+    highlightedIndex.value = Math.min(highlightedIndex.value + 1, filteredStocks.value.length - 1)
+    scrollToHighlighted()
+  } else if (event.key === 'ArrowUp') {
+    event.preventDefault()
+    highlightedIndex.value = Math.max(highlightedIndex.value - 1, -1)
+    scrollToHighlighted()
+  } else if (event.key === 'Enter' && highlightedIndex.value >= 0) {
+    event.preventDefault()
+    const stock = filteredStocks.value[highlightedIndex.value]
+    if (stock) selectStock(stock)
+  }
+}
+
+const scrollToHighlighted = () => {
+  if (highlightedIndex.value >= 0 && stocksList.value) {
+    const highlightedElement = stocksList.value.querySelectorAll('.stock-option')[highlightedIndex.value]
+    if (highlightedElement) {
+      highlightedElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    }
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+  document.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+  document.removeEventListener('keydown', handleKeydown)
+})
 
 const investmentAmount = ref(settingsStore.defaultInvestmentAmount)
 const purchasePrice = ref(0)
