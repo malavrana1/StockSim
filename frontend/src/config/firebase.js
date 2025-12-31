@@ -8,8 +8,11 @@ const firebaseConfig = {
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "stocksim-3ab78",
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "stocksim-3ab78.firebasestorage.app",
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "1041842358696",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:1041842358696:web:2d84685862567b2771359d",
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "G-YBFGYF1810"
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:1041842358696:web:2d84685862567b2771359d"
+}
+
+if (import.meta.env.VITE_FIREBASE_MEASUREMENT_ID) {
+  firebaseConfig.measurementId = import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 }
 
 if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
@@ -25,6 +28,7 @@ try {
   auth = getAuth(app)
   db = getFirestore(app)
 } catch (error) {
+  console.error('Firebase initialization error:', error)
   throw error
 }
 
