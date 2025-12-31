@@ -11,10 +11,6 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:1041842358696:web:2d84685862567b2771359d"
 }
 
-if (import.meta.env.VITE_FIREBASE_MEASUREMENT_ID) {
-  firebaseConfig.measurementId = import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
-}
-
 if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
   throw new Error('Firebase configuration error: Missing required fields')
 }
